@@ -1,5 +1,8 @@
 const express = require ("express");
 const modeloUsuario = require("./backend/models/user.model");
+const productos = require("./backend/models/productos");
+const clientes = require("./backend/models/clientes");
+
 require("dotenv").config();
 const app = express();
 
@@ -48,6 +51,35 @@ app.delete("/borrar/:ref", async (req, res) => {
     else
         res.status(404).send("Borrado fallido") 
     });
+
+
+
+
+app.get("/productos/", async (req, res) => {
+    const consulta = await productos.find({});
+    res.send(consulta)
+    
+})
+
+
+
+
+
+
+app.get("/clientes", async (req, res) => {
+    const consulta = await clientes.find({});
+    res.send(consulta)
+    
+})
+
+const emailService = require("./backend/utils/emails.service");
+app.get('/enviarcorreo',  async (req, res) => {
+    await emailService.sendEmail(
+        'fv29961125@gmail.com',
+        "Confirmación de Registro",
+        "Bienvenido a la tienda en línea más top de todo el mundo",
+    );
+    })
 
 
 app.listen(process.env.PORT)

@@ -1,5 +1,4 @@
 const conexion = require('../config/connection')
-
 const userSchema = new conexion.Schema({
     correo:{
         type: String,
