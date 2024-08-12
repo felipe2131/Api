@@ -41,6 +41,14 @@ app.put("/editar/:ref", async (req, res) => {
         res.status(404).send("Actualizacion fallida")
     })
     
+app.delete("/borrar/:ref", async (req, res) => {
+    let borrar = await modeloUsuario.findOneAndDelete({_id:req.params.ref});
+    if(borrar)
+        res.status(200).send("Borrado exitoso")
+    else
+        res.status(404).send("Borrado fallido") 
+    });
+
 
 app.listen(process.env.PORT)
 
